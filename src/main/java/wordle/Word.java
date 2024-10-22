@@ -45,23 +45,23 @@ public class Word {
     }
 
     public String convertAnswerToColorTile(String playerAnswer) {
-        List<TyleColor> tyleList = new ArrayList<>(wordLength);
+        List<TyleColor> tileList = new ArrayList<>(wordLength);
 
         // Init
         copyAnswerLettersMap = new HashMap<>(this.answerLettersMap);
-        for (int i = 0; i < 5; i++) {
-            tyleList.add(TyleColor.NOT_EXIST);
+        for (int i = 0; i < wordLength; i++) {
+            tileList.add(TyleColor.NOT_EXIST);
         }
 
         // Check for green tile
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < wordLength; i++) {
             char answerChar = answer.charAt(i);
             char playerAnswerChar = playerAnswer.charAt(i);
 
             if (answerChar == playerAnswerChar) {
                 reduceLetterCount(playerAnswerChar);
-                tyleList.remove(i);
-                tyleList.add(i, TyleColor.CORRECT);
+                tileList.remove(i);
+                tileList.add(i, TyleColor.CORRECT);
             }
         }
 
@@ -80,14 +80,14 @@ public class Word {
                 continue;
             }
 
-            tyleList.remove(i);
-            tyleList.add(i, TyleColor.WRONG_LOCATION);
+            tileList.remove(i);
+            tileList.add(i, TyleColor.WRONG_LOCATION);
 
             reduceLetterCount(playerAnswerChar);
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (TyleColor anEnum : tyleList) {
+        for (TyleColor anEnum : tileList) {
             stringBuilder.append(anEnum.getSymbol());
         }
         return String.join("", stringBuilder);

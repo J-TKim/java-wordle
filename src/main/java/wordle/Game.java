@@ -1,7 +1,5 @@
 package wordle;
 
-import java.util.Scanner;
-
 
 public class Game {
     private static final int maxRound = 6;
@@ -12,17 +10,13 @@ public class Game {
 
     private final Word word = new Word();
 
-    public boolean getIsEnd() {
-        return isEnd;
-    }
-
     public Game() {
         // Start Game!
         System.out.println("Start Game!");
         for (int i = 0; i < maxRound; i++) {
             round();
 
-            if (getIsEnd()) {
+            if (isEnd) {
                 break;
             }
         }
