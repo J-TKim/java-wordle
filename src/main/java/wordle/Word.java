@@ -66,7 +66,7 @@ public class Word {
         }
 
         // Check for yellow tile
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < wordLength; i++) {
             char answerChar = answer.charAt(i);
             char playerAnswerChar = playerAnswer.charAt(i);
 
