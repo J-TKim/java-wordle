@@ -8,40 +8,41 @@ import java.util.Map;
 public class Word {
     private final static int wordLength = 5;
     private final String answer;
-    private final Map<Character, Integer> answerLettersMap = new HashMap<>();
+    private final Map<Character, Integer> answerLettersMap;
     private Map<Character, Integer> copyAnswerLettersMap;
 
     public Word() {
         this.answer = "apple";
-        extractLetters(answer);
+        answerLettersMap = extractLetters();
     }
 
     public Word(String answer) {
-        checkWordIsValid(answer);
         this.answer = answer;
-        extractLetters(answer);
+        answerLettersMap = extractLetters();
     }
 
     // Check word is valid
-    public boolean checkWordIsValid(String word) {
+    public boolean checkWordIsNotValid(String word) {
         if (word.length() != wordLength) {
-            return false;
+            return true;
         }
         for (char ch : word.toCharArray()) {
             if (!(ch >= 'a' && ch <= 'z'))
 
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }
 
-    private void extractLetters(String answer) {
+    private Map<Character, Integer> extractLetters() {
+        Map<Character, Integer> answerLettersMap = new HashMap<>();
         for (Character ch : answer.toCharArray()) {
             if (!answerLettersMap.containsKey(ch)) {
                 answerLettersMap.put(ch, 0);
             }
             answerLettersMap.put(ch, answerLettersMap.get(ch) + 1);
         }
+        return answerLettersMap;
     }
 
     public String convertAnswerToColorTile(String playerAnswer) {
@@ -86,6 +87,10 @@ public class Word {
             reduceLetterCount(playerAnswerChar);
         }
 
+        return ListToString(tileList);
+    }
+
+    private String ListToString(List<TyleColor> tileList) {
         StringBuilder stringBuilder = new StringBuilder();
         for (TyleColor anEnum : tileList) {
             stringBuilder.append(anEnum.getSymbol());

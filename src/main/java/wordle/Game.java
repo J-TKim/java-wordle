@@ -1,6 +1,5 @@
 package wordle;
 
-
 public class Game {
     private static final int maxRound = 6;
     private int round = 1;
@@ -32,12 +31,11 @@ public class Game {
 
         String input;
         System.out.print("Input: ");
-        while (!word.checkWordIsValid(input = Input.inputLine())) {
+        while (word.checkWordIsNotValid(input = Input.inputLine())) {
             System.out.print("Input again: ");
         }
-        final String guess = input;
 
-        playerAnswers[round - 1] = word.convertAnswerToColorTile(guess);
+        playerAnswers[round - 1] = word.convertAnswerToColorTile(input);
         printMyAnswer();
 
         if (playerAnswers[round - 1].equals("🟩🟩🟩🟩🟩")) {
